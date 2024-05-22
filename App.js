@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { Text, View, StyleSheet, TextInput, Button } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./screens/HomeScreen";
+import ScannerScreen from "./screens/ScannerScreen";
+import HistoryScreen from "./screens/HistoryScreen";
+import CheckBookScreen from "./screens/CheckBookScreen";
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+
+function CheckBookStack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Check Book" component={CheckBookScreen} />
+      <Stack.Screen name="Scanner" component={ScannerScreen} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  const [barcode, setBarcode] = useState(null);
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Check Book" component={CheckBookStack} />
+        <Drawer.Screen name="History" component={HistoryScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
