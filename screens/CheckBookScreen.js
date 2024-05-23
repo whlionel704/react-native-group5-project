@@ -2,6 +2,11 @@ import * as React from "react";
 import { Text, View, Button } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
+function formatDate(date) {
+  const datePart = date.split("T")[0];
+  return datePart;
+}
+
 function CheckBookScreen({ navigation, barcode, isLoading, setIsLoading }) {
   useFocusEffect(
     React.useCallback(() => {
@@ -17,11 +22,16 @@ function CheckBookScreen({ navigation, barcode, isLoading, setIsLoading }) {
       <Text> </Text>
       {!isLoading && (
         <View key={barcode.id}>
-          <Text>Book id: {barcode.id}</Text>
+          <Text>Book ID: {barcode.id}</Text>
           <Text></Text>
-          <Text>Book Name: {barcode.name}</Text>
+          <Text>Book Name:</Text>
+          <Text>{barcode.name}</Text>
           <Text></Text>
-          <Text>Book details: {barcode.details}</Text>
+          <Text>Publish Date:</Text>
+          <Text>{formatDate(barcode.published)}</Text>
+          <Text></Text>
+          <Text>Book details: </Text>
+          <Text>{barcode.details}</Text>
           <Text></Text>
         </View>
       )}
