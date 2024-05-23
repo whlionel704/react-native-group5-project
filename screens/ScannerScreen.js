@@ -6,6 +6,8 @@ export default function ScannerScreen({
   navigation,
   setBarcode,
   setIsLoading,
+  history,
+  setHistory,
 }) {
   //set the component states
   const [hasPermission, setHasPermission] = useState(null);
@@ -31,6 +33,7 @@ export default function ScannerScreen({
       );
       const result = await response.json();
       setBarcode(result);
+      setHistory([...history, result]);
       navigation.navigate("Book Scanner");
       setIsLoading(false);
     } catch (error) {
