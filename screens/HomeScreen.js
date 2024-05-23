@@ -15,7 +15,7 @@ const HomeScreen = () => {
       setCurrentNumber(currentNumber - 1);
     }
   };
- // Home Screen will genereate QR code for numbers 1 to 100
+ // Home Screen will genereate QR code for numbers 1 to 100 //
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ marginBottom: 20 }}>Book Id: {currentNumber}</Text>
