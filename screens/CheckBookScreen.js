@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Text, View, Button } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 function formatDate(date) {
@@ -16,27 +22,54 @@ function CheckBookScreen({ navigation, barcode, isLoading, setIsLoading }) {
       };
     }, []) // Pass an empty dependency array to ensure the effect is only run once when the component mounts
   );
+
   return (
-    <View>
+    <View style={styles.container}>
       <Button title="Scan" onPress={() => navigation.navigate("Scanner")} />
-      <Text> </Text>
-      {!isLoading && (
-        <View key={barcode.id}>
-          <Text>Book ID: {barcode.id}</Text>
-          <Text></Text>
-          <Text>Book Name:</Text>
-          <Text>{barcode.name}</Text>
-          <Text></Text>
-          <Text>Publish Date:</Text>
-          <Text>{formatDate(barcode.published)}</Text>
-          <Text></Text>
-          <Text>Book details: </Text>
-          <Text>{barcode.details}</Text>
-          <Text></Text>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <View key={barcode.id} style={styles.bookContainer}>
+          <Text style={styles.label}>Book ID:</Text>
+          <Text style={styles.value}>{barcode.id}</Text>
+          <Text style={styles.label}>Book Name:</Text>
+          <Text style={styles.value}>{barcode.name}</Text>
+          <Text style={styles.label}>Publish Date:</Text>
+          <Text style={styles.value}>{formatDate(barcode.published)}</Text>
+          <Text style={styles.label}>Book Details:</Text>
+          <Text style={styles.value}>{barcode.details}</Text>
         </View>
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#f5f5f5",
+  },
+  bookContainer: {
+    marginTop: 20,
+    padding: 16,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 8,
+  },
+  value: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+});
 
 export default CheckBookScreen;

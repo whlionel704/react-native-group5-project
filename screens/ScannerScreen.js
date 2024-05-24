@@ -58,9 +58,6 @@ export default function ScannerScreen({
         onBarcodeScanned={scanned ? undefined : handleBarcodeScanned}
         barcodeScannerSettings={{ barcodeTypes: ["qr", "pdf417", "code128"] }} // this property allows you to provide what kinds of barcodes/qr codes it can scan
       />
-      {scanned && (
-        <Button title={"Tap to scan again"} onPress={() => setScanned(false)} />
-      )}
     </View>
   );
 }

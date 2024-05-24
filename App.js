@@ -10,7 +10,14 @@ import CheckBookScreen from "./screens/CheckBookScreen";
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
-function CheckBookStack({ barcode, setBarcode, isLoading, setIsLoading, history, setHistory }) {
+function CheckBookStack({
+  barcode,
+  setBarcode,
+  isLoading,
+  setIsLoading,
+  history,
+  setHistory,
+}) {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Book Scanner">
