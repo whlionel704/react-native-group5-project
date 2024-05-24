@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  Text,
-  View,
-  Button,
-  StyleSheet,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, Button, StyleSheet, Image } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 function formatDate(date) {
@@ -26,10 +20,11 @@ function CheckBookScreen({ navigation, barcode, isLoading, setIsLoading }) {
   return (
     <View style={styles.container}>
       <Button title="Scan" onPress={() => navigation.navigate("Scanner")} />
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
+      {!isLoading && (
         <View key={barcode.id} style={styles.bookContainer}>
+          <View style={styles.imageContainer}>
+            <Image source={{ uri: barcode.image }} style={styles.image} />
+          </View>
           <Text style={styles.label}>Book ID:</Text>
           <Text style={styles.value}>{barcode.id}</Text>
           <Text style={styles.label}>Book Name:</Text>
@@ -69,6 +64,16 @@ const styles = StyleSheet.create({
   value: {
     fontSize: 16,
     marginBottom: 8,
+  },
+  imageContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  image: {
+    width: 100,
+    height: 150,
+    resizeMode: "cover",
   },
 });
 

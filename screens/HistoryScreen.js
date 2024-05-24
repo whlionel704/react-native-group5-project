@@ -16,7 +16,7 @@ const HistoryScreen = ({ history }) => {
       <FlatList
         data={history}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item, index) => `${item.id}-${index}`}
       />
     </View>
   );
